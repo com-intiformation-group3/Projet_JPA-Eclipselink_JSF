@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="pu_gestion_transports">
+
+
+		<!-- 1. provider : permet de préciser le fournisseur de persistance (provider) 
+			=> l'implémentation de JPA 'Eclipselink' -->
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+
+		<!-- 2. déclaration des classes entités -->
+		<class>com.intiformation.gestiontransports.entity.Utilisateur</class>
+		
+
+		<!-- 3. proriétés JPA -->
+		<properties>
+
+			<!-- 3.1. propriétes pour définir les infos de connexion à la bdd -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/db_gestion_transports?createDatabaseIfNotExist=true" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+
+			<!-- 3.2. propriété pour définir la stratégie de génération des tables -->
+			<!-- valeurs possibles : none : pas de création ni de suppression create : 
+				le provider crée les tables au déploiement. Pas de changement après déploiement. 
+				drop-and-create : suppression et recréation au déploiement. drop : suppression 
+				au déploiement. -->
+			<property
+				name="javax.persistence.schema-generation.database.action"
+				value="drop-and-create" />
+
+			<!-- 3.3. propriété pour afficher les requêtes SQL dans la console d'eclipse -->
+			<property name="eclipselink.logging.level" value="FINE" />
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
