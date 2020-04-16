@@ -1,12 +1,17 @@
 package com.intiformation.gestiontransports.dao;
 
+import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import com.intiformation.gestiontransports.entity.Utilisateur;
+import com.intiformation.gestiontransports.tool.JPAUtil;
 
 public class UtilisateurDAOImpl extends GenericDAOImpl<Utilisateur> implements IUtilisateurDAO{
 
+	//props
+	protected EntityManager entityManager = JPAUtil.getEntityManager();	
+	
 	//ctor
 	public UtilisateurDAOImpl() {
 		super(Utilisateur.class);
@@ -35,6 +40,23 @@ public class UtilisateurDAOImpl extends GenericDAOImpl<Utilisateur> implements I
 		}
 		
 		return false;
+	}
+	
+	public Long getIdByEmail(String pEmail) {
+		
+		try {
+			
+			Utilisateur u = entityManager.find(Utilisateur.class, pEmail);
+			long id = u.getIdUtilisateur();
+			
+			return id;
+			
+		} catch (PersistenceException e) {
+			System.out.println("... Erreur lors de la récup de l'id de l'utilisateur by son email ....");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	

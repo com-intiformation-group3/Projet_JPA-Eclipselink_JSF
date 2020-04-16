@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "marchandise")
 @Table(name="marchandises")
 public class Marchandise implements Serializable{
 
@@ -27,6 +27,8 @@ public class Marchandise implements Serializable{
 	@Column(name = "volume")
 	private Double volume;
 	
+	private Long fk;
+	
 	
 	
 	//association Marchandise et Cargaison
@@ -35,7 +37,7 @@ public class Marchandise implements Serializable{
 	 * 							many     marchandises  to  one cargaison
 	 */
 	@ManyToOne
-	@JoinColumn(name = "cargaison_ref", referencedColumnName = "reference") //gestion de la FK
+	@JoinColumn(name = "cargaison_ref", referencedColumnName = "reference", updatable=true) //gestion de la FK
 	private Cargaison cargaison;
 
 
@@ -49,6 +51,7 @@ public class Marchandise implements Serializable{
 		this.poids = poids;
 		this.volume = volume;
 	}
+	
 
 	
 	//getters|setters
@@ -86,6 +89,16 @@ public class Marchandise implements Serializable{
 	public void setCargaison(Cargaison cargaison) {
 		this.cargaison = cargaison;
 	}
+
+	public Long getFk() {
+		return fk;
+	}
+
+	public void setFk(Long fk) {
+		this.fk = fk;
+	}
+	
+	
 	
 	
 }

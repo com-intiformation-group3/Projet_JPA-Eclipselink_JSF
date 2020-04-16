@@ -9,30 +9,21 @@ import javax.persistence.Entity;
 @DiscriminatorValue("routière")
 public class CargaisonRoutiere extends Cargaison{
 
-	//prop
-	@Column(name = "temperature")
-	Double temperature;
-
 	
 	//ctors
 	public CargaisonRoutiere() {
 	}
 
-	public CargaisonRoutiere(String reference, Double distance, String date_livraison, Double temperature) {
+	public CargaisonRoutiere(Long reference, Double distance, String date_livraison, Double temperature) {
 		super( reference,  distance,  date_livraison);
 //		this.reference = reference;
 //		this.distance = distance;
 //		this.date_livraison = date_livraison;
-		this.temperature = temperature;
+		this.temperature = 11.;
+//		this.utilisateur_id = utilisateur.getIdUtilisateur();
 	}
 
 	
-	//getters|setters
-	public Double getTemperature() {
-		return temperature;
-	}
-	public void setTemperature(Double temperature) {
-		this.temperature = temperature;
-	}
+
 	
 }

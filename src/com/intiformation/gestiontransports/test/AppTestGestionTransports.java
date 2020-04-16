@@ -1,5 +1,6 @@
 package com.intiformation.gestiontransports.test;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -19,7 +20,16 @@ public class AppTestGestionTransports {
 		Utilisateur utilisateur2 = new Utilisateur("A.Duchesse", "A.Duchesse@gmail.com", "456");
 		Utilisateur utilisateur3 = new Utilisateur("A.Caron", "A.Caron@gmail.com", "123");
 		
-		//2. Definittion des  marchandises
+		
+		//2. Définition des cargaisons
+		Cargaison cargaison1 = new CargaisonRoutiere(1L, 4.0, "22/06/2020", 11.0);
+		Cargaison cargaison2 = new CargaisonRoutiere(2L, 13.0, "05/05/2006", 11.0);
+		
+		Cargaison cargaison3 = new CargaisonAerienne(3L, 8892.0, "22/06/2020", 0.0);
+		
+		
+		
+		//3. Definittion des  marchandises
 		Marchandise vin_rouge = new Marchandise("vin rouge", 1.0, 0.1);
 		Marchandise vin_blanc = new Marchandise("vin blanc", 1.0, 0.1);
 		Marchandise vin_rose = new Marchandise("vin rosé", 1.0, 0.1);
@@ -31,13 +41,6 @@ public class AppTestGestionTransports {
 		Marchandise iphone_11 = new Marchandise("iphone 11", 0.194, 0.09);
 		Marchandise iphone_x = new Marchandise("iphone X", 0.174, 0.084);
 		Marchandise iphone_xr = new Marchandise("iphone xr", 0.194, 0.09);
-		
-		
-		//3. Définition des cargaisons
-		Cargaison cargaison1 = new CargaisonRoutiere("1", 4.0, "22/06/2020", 11.0);
-		Cargaison cargaison2 = new CargaisonRoutiere("2", 13.0, "05/05/2006", 11.0);
-		
-		Cargaison cargaison3 = new CargaisonAerienne("3", 8892.0, "22/06/2020", 0.0);
 		
 		
 		

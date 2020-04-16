@@ -1,0 +1,19 @@
+
+
+//initialisation
+$(function(){
+    $( "#accordion" ).accordion();
+
+    
+
+});
+ 
+    
+    
+
+
+
+
+
+
+

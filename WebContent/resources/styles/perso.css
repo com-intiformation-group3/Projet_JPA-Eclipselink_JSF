@@ -1,0 +1,259 @@
+@charset "ISO-8859-1";
+
+.error{
+	color: red;
+	font-style: italic;
+}
+
+@charset "UTF-8";
+
+.bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+}
+
+@media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+}
+
+@media (min-width: 576px) {
+  .container, .container-sm {
+    max-width: 540px;
+  }
+}
+  .accueil a {
+    color: blue;
+  }
+  .accueil a:hover {
+    background: lightblue;
+  }
+  .accueil a:hover a{
+    color: blue;
+  }
+#accordion{
+  display: -ms-flexbox;
+
+  -ms-flex-align: center;
+
+  background-color: white;
+  width: 75%; 
+  height: auto;
+  margin-left: 10%;
+  margin-top: 70px;
+  border-radius: 50px;
+  box-shadow: 6px 6px 12px 12px #cfcfcf;
+  
+    padding: 2% 3%;
+}
+
+.accueil {
+  display: -ms-flexbox;
+  -ms-flex-align: center;
+  padding: 2% 3%;
+  background-color: transparent;
+  box-shadow: 6px 6px 1px 1px #cfcfcf;
+}
+
+
+h3{
+  text-align: center;
+}
+
+.celluleAccordion{
+      float: left;
+  }
+  
+.form1{  
+  border: white;
+  border-style: double;
+  width: 400px; 
+  height: 420px;
+  margin-left: 8em;
+  margin-top: 300px;
+  background-color: transparent;
+  color: white;
+  border-radius: 15px;
+}
+.table1{
+  padding-left: 15%;
+  padding-bottom: 10%;
+  padding-top: 10%;
+  background-color: transparent;
+  color: white;
+  border-radius: 3px;
+}
+
+.formC{
+  border: white;
+  border-style: double;
+  width: 400px; 
+  height: 380px;
+  margin-left: 8em;
+  margin-top: 300px;
+  background-color: transparent;
+  color: white;
+  border-radius: 15px;
+}
+.tableC{
+  padding-left: 13%;
+  padding-bottom: 10%;
+  padding-top: 10%;
+  background-color: transparent;
+  color: white;
+  border-radius: 3px;
+}
+.formC2{
+  border: white;
+  border-style: double;
+  width: 400px; 
+  height: 250px;
+  margin-left: 8em;
+  margin-top: 340px;
+  background-color: transparent;
+  color: white;
+  border-radius: 15px;
+}
+.tableC2{
+  padding-left: 17%;
+  padding-bottom: 10%;
+  padding-top: 10%;
+  background-color: transparent;
+  color: white;
+  border-radius: 3px;
+}
+.formC3{
+  border: white;
+  border-style: double;
+  width: 440px; 
+  height: 360px;
+  margin-left: 8em;
+  margin-top: 320px;
+  background-color: transparent;
+  color: white;
+  border-radius: 15px;
+}
+.inputText{
+	width: 98%;
+	border-style: double;
+    border-color: grey;
+}
+.inputText:hover{
+	background-color: lightblue;
+}
+
+.sform
+{
+    font-weight: bold;
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 17%;
+    padding: 5% 10%;
+    border-style: double;
+    border-color: grey;
+    border-radius: 10%;
+}
+.sform:hover
+{
+    background-color: lightgrey;
+}
+
+
+body
+{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/*
+.baccueil{
+  position: relative;
+  background-repeat:no-repeat;
+  background-size: cover;
+  color: black;
+}*/
+
+.bt_accueil{
+	border-color: black;
+	border-radius: 20px;
+}
+.bt_accueil:hover{
+	border-color: white;
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+}
+.bt2_accueil{
+	margin-left: 42%;
+	border-color: white;
+	background-color: black;
+	color: white;
+	border-radius: 20px;
+}
+.bt2_accueil:hover{
+	border-color: black;
+	background-color: white;
+	color: black;
+	border-radius: 20px;
+}
+
+.bt_accueilChercher{
+	background-color: green;
+	color: white;
+	border-radius: 20px;
+}
+.bt_accueilChercher:hover{
+	border-color: green;
+	background-color: white;
+	color: green;
+	border-radius: 20px;
+}
+.bt_accueilReset{
+	background-color: red;
+	color: white;
+	border-radius: 20px;
+}
+.bt_accueilReset:hover{
+	border-color: red;
+	background-color: white;
+	color: red;
+	border-radius: 20px;
+}
+
+
+.bform{
+  position: relative;
+  background-image: url("#{request.contextPath}/resources/images/form_2.jpg");
+  background-repeat:no-repeat;
+  background-size: cover;
+}
+
+
+
+
+
+#accordion tr:nth-child(even) {
+  background-color: #f2f2f2;
+
+	
+}
+#accordion tr:nth-child(even):hover, #accordion tr:nth-child(odd):hover {
+  color: #fff;
+	background-color: black;
+}
+#accordion tr:nth-child(even):hover a, #accordion tr:nth-child(odd):hover a{
+  color: lightblue;
+}
+#accordion tr:nth-child(even):hover a:hover, #accordion tr:nth-child(odd):hover a:hover{
+  background-color: black;
+}
+
+td{
+}

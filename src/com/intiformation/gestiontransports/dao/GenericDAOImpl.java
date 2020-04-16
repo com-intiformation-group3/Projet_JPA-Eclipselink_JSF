@@ -2,8 +2,10 @@ package com.intiformation.gestiontransports.dao;
 
 import java.util.List;
 
+import javax.faces.event.ActionEvent;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -12,6 +14,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.intiformation.gestiontransports.entity.Marchandise;
 import com.intiformation.gestiontransports.tool.JPAUtil;
 
 public class GenericDAOImpl<T> implements IGenericDAO<T>{
@@ -34,7 +37,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 	
 	
 	//méthodes
-	public void ajouter(T entity) {
+	public boolean ajouter(T entity) {
 
 		EntityTransaction transaction = null;
 
@@ -44,21 +47,23 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 			transaction.begin();
 			entityManager.persist(entity);
 			transaction.commit();
+			
+			return true;
 
 		} catch (PersistenceException ex) {
 
 			if (transaction != null) {
 				transaction.rollback();
-				JPAUtil.closeEntityManager();
 				ex.printStackTrace();
 			}
 
 		}
+		return false;
 		
 	}
 
 
-	public void modifier(T entity) {
+	public boolean modifier(T entity) {
 
 		EntityTransaction transaction = null;
 
@@ -69,6 +74,8 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 			entityManager.merge(entity);
 			transaction.commit();
 
+			return true;
+			
 		} catch (PersistenceException ex) {
 
 			if (transaction != null) {
@@ -77,10 +84,11 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 			}
 
 		}
+		return false;
 		
 	}
 
-	public void supprimer(Long id) {
+	public boolean supprimer(Long id) {
 
 		EntityTransaction transaction = null;
 
@@ -91,6 +99,8 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 			entityManager.remove(getById(id));
 			transaction.commit();
 
+			return true;
+			
 		} catch (PersistenceException ex) {
 
 			if (transaction != null) {
@@ -98,7 +108,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 				ex.printStackTrace();
 			}
 		}
-		
+		return false;
 	}
 
 	public T getById(Long id) {
@@ -119,27 +129,74 @@ public class GenericDAOImpl<T> implements IGenericDAO<T>{
 
 		return getAllQuery.getResultList();
 	}
+	
+	
+	
+	public List<T> getAllByFKc(Long valeur) {
+		
+		//1. récup de l'entity manager
+		EntityManager em = Persistence.createEntityManagerFactory("pu_gestion_transports").createEntityManager();
+		
+		//2. récup d'une transaction à partir de l'EM
+		EntityTransaction transaction = em.getTransaction();
+		
+		//2.1 ouverture de la transaction
+		transaction.begin();
+		
+		//3. contenu de la requete JPQL pour la modif
+		String requeteUpdate = "SELECT e FROM cargaison e "
+							+ " WHERE e.utilisateur.idUtilisateur = :pEns";
+		
+		//4. création de la requete
+		Query selectQuery = em.createQuery(requeteUpdate);
+		
+		//4.1 passage de params
+		selectQuery.setParameter("pEns", valeur);
+		
+		//1.4 exécution et récup du résultat de la requête
+		List<T> liste_marchandises = selectQuery.getResultList();
+	
+		
+		
+		return liste_marchandises;
+	}
+	
+	
+	public List<T> getAllByFKm(Long valeur) {
+		
+		//1. récup de l'entity manager
+		EntityManager em = Persistence.createEntityManagerFactory("pu_gestion_transports").createEntityManager();
+		
+		//2. récup d'une transaction à partir de l'EM
+		EntityTransaction transaction = em.getTransaction();
+		
+		//2.1 ouverture de la transaction
+		transaction.begin();
+		
+		//3. contenu de la requete JPQL pour la modif
+		String requeteUpdate = "SELECT e FROM marchandise e "
+							+ " WHERE e.cargaison.reference = :pEns";
+		
+		//4. création de la requete
+		Query selectQuery = em.createQuery(requeteUpdate);
+		
+		//4.1 passage de params
+		selectQuery.setParameter("pEns", valeur);
+		
+		//1.4 exécution et récup du résultat de la requête
+		List<T> liste_marchandises = selectQuery.getResultList();
+	
+		
+		
+		return liste_marchandises;
+	}	
+	
+	
+	
 
 	
-	
-	public List<T> getAllByFK(String nomFK, int valeur) {
-		
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		
-		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
-		
-		Root<T> clauseFROM = criteriaQuery.from(entityClass);
-		
-		
-		Predicate conditionClauseWhere = criteriaBuilder.equal(clauseFROM.get(nomFK), valeur);
-		
-		CriteriaQuery<T> clauseWHERE = criteriaQuery.select(clauseFROM).where(conditionClauseWhere);
-		
-		TypedQuery<T> getAllQueryByFK = entityManager.createQuery(clauseWHERE);
-		
-		
-		return getAllQueryByFK.getResultList();
-	}
+
+
 
 	public Long count() {
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<h:head>
+	<title>page d'authentification</title>
+	
+	
+	<!-- lien vers la feuille de style Bootstrap -->
+	<h:outputStylesheet library="styles" name="bootstrap.min.css"/>
+
+	<!-- lien css -->
+	<h:outputStylesheet library="styles" name="authentification.css"/>
+
+</h:head> 
+<h:body> 
+
+	<!-- ============================================ -->
+	<!-- ====== Affichage des messages globaux ====== -->
+	<!-- ============================================ -->
+	<!-- 
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,
+												"Echec de connexion",
+												"Identifiant ou Mot de passe invalide");
+												
+		ContextJSF.addMessage(null, message);
+	
+	 -->
+	<h:messages globalOnly="true" styleClass="error" layout="table" showDetail="true" />
+	
+	
+	
+		
+	<!-- ============================================ -->
+	<!-- ======Formulaire de connexion ============== -->
+	<!-- ============================================ -->
+	
+	<h:form class="form-signin">
+	
+		
+	    <!-- image du formulaire -->
+	  	<h:graphicImage styleClass="mb-4" value="./resources/images/image_login.jpg" width="100%" height="100%" />
+	  	<h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+	  
+	  	<!--  champ texte pour le mail -->
+	  	<h:inputText id="inputEmail" required="true" a:placeholder="Adresse mail" styleClass="form-control"
+						 requiredMessage="Identifiant obligatoire"
+						 value="#{authenticationBean.login}"/>
+						 
+		<h:message for="inputEmail" styleClass="error"/>
+	  
+	  
+	  
+	  
+	  	<!--  champ texte pour le mot de passe -->
+	  	<h:inputText id="inputPassword" required="true" a:placeholder="Mot de passe" styleClass="form-control"
+						 requiredMessage="Mot de passe obligatoire"
+						 value="#{authenticationBean.password}"/>
+		
+		<h:message for="inputPassword" styleClass="error"/>
+	  
+	  
+	  
+	  	
+	  	<!--  bouton de soumission du formulaire -->
+	  	<br/>
+	  	<h:commandButton value="Se connecter" action="#{authenticationBean.connecterUtilisateur()}" styleClass="btn btn-lg btn-primary btn-block" />
+
+		<p class="mt-5 mb-3 text-muted">&nbsp;&nbsp; &copy; 2020 - FERNANDES | NASSOGOMO</p>
+	  
+	</h:form>
+	
+	
+	
+	
+</h:body> 
+</html>

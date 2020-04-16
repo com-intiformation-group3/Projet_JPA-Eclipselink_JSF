@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<faces-config version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+
+
+	<!-- =============================================================== -->
+	<!-- =============== Configuration Gestion Cargaison  ================= -->
+	<!-- =============================================================== -->
+	<!-- 1. validateur de l'identifiant implémenté dans la classe IdentifiantValidateur -->
+	
+	<!-- 1. règle de navigation des Cargaisons pour la page 'accueil.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 1. page de départ -->
+		<from-view-id>/accueil.xhtml</from-view-id>
+		
+		
+		<!-- 1.1 cas de navigation : accueil.xhtml vers accueil.xhtml (suppression) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>listCargaison</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+
+
+		<!-- 1.2 cas de navigationn : 'accueil.xhtml' vers modifier-cargaison.xhtml (modification) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>editCargaison</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/modifier-cargaison.xhtml</to-view-id>
+		</navigation-case>
+		
+		
+		
+		<!-- 1.3 cas de navigation : 'accueil.xhtml' vers ajouter-cargaison.xhtml (ajout) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>addCargaison</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajouter-cargaison.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+	
+	
+<!-- ================================================================================================================================================================== -->	
+	
+	<!-- 2. règle de navigation pour la page 'modifier-cargaison.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 2.1 page de départ -->
+		<from-view-id>/modifier-cargaison.xhtml</from-view-id>
+		
+		
+		<!-- 2.2 cas de navigation : modifier-cargaison.xhtml vers accueil.xhtml (modification) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink de modifier-cargaison.xhtml) -->
+			<from-outcome>listCargaison</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>	
+
+
+<!-- ================================================================================================================================================================== -->	
+
+
+	<!-- 3. règle de navigation pour la page 'ajouter-cargaison.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 3.1 page de départ -->
+		<from-view-id>/ajouter-cargaison.xhtml</from-view-id>
+		
+		
+		<!-- 3.2 cas de navigation : ajouter-cargaison.xhtml vers accueil.xhtml (ajout) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink de ajouter-cargaison.xhtml) -->
+			<from-outcome>listCargaison</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>		
+	
+	
+	
+	<!-- =============================================================== -->
+	<!-- =========== Configuration Gestion Marchandise  ================ -->
+	<!-- =============================================================== -->
+	<!-- 1. règle de navigation des Marchandises pour la page 'accueil.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 1.1 page de départ -->
+		<from-view-id>/accueil.xhtml</from-view-id>	
+		
+		<!-- 1.2 cas de navigation : accueil.xhtml vers accueil.xhtml (suppression) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>listMarchandise</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+
+
+
+		<!-- 1.3 cas de navigationn : 'accueil.xhtml' vers modifier-marchandise.xhtml (modification) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>editMarchandise</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/modifier-marchandise.xhtml</to-view-id>
+		</navigation-case>
+		
+		
+		
+		<!-- 1.4 cas de navigationn : 'accueil.xhtml' vers ajouter-marchandise.xhtml (ajout) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink) -->
+			<from-outcome>addMarchandise</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/ajouter-marchandise.xhtml</to-view-id>
+		</navigation-case>
+		
+				
+		
+	</navigation-rule>
+	
+	
+<!-- ================================================================================================================================================================== -->	
+	
+	<!-- 2. règle de navigation pour la page 'modifier-marchandise.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 2.1 page de départ -->
+		<from-view-id>/modifier-marchandise.xhtml</from-view-id>
+		
+		
+		<!-- 2.2 cas de navigation : modifier-marchandise.xhtml vers accueil.xhtml (modification) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink de modifier-marchandise.xhtml) -->
+			<from-outcome>listMarchandise</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>	
+
+
+<!-- ================================================================================================================================================================== -->	
+
+
+	<!-- 3. règle de navigation pour la page 'ajouter-marchandise.xhtml' -->
+	<navigation-rule>
+	
+		<!-- 3.1 page de départ -->
+		<from-view-id>/ajouter-marchandise.xhtml</from-view-id>
+		
+		
+		<!-- 3.2 cas de navigation : ajouter-marchandise.xhtml vers accueil.xhtml (ajout) -->
+		<navigation-case>
+			<!-- clé d'outcom (valeur de l'attribut 'action' de h:commandlink de ajouter-marchandise.xhtml) -->
+			<from-outcome>listMarchandise</from-outcome>
+			<!-- page de destination -->
+			<to-view-id>/accueil.xhtml</to-view-id>
+		</navigation-case>
+		
+	</navigation-rule>	
+
+
+<!-- ================================================================================================================================================================== -->	
+
+
+	
+	
+</faces-config>

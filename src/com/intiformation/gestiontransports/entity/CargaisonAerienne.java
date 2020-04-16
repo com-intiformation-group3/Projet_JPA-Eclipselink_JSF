@@ -9,30 +9,20 @@ import javax.persistence.Entity;
 @DiscriminatorValue("aérienne")
 public class CargaisonAerienne extends Cargaison{
 
-	//prop
-	@Column(name = "poids_max")
-	Double poids_max = 1500.;
 
-	
 	//ctors
 	public CargaisonAerienne() {
 	}
 
-	public CargaisonAerienne(String reference, Double distance, String date_livraison, Double poids_max) {
+	public CargaisonAerienne(Long reference, Double distance, String date_livraison, Double poids_max) {
 		super( reference,  distance,  date_livraison);
 //		this.reference = reference;
 //		this.distance = distance;
 //		this.date_livraison = date_livraison;
-		poids_max = this.poids_max;
+		this.poids_max = 1500.;
+//		this.utilisateur_id = utilisateur.getIdUtilisateur();
 	}
 
 	
-	//getters|setters
-	public Double getPoids_max() {
-		return poids_max;
-	}
-	public void setPoids_max(Double poids_max) {
-		this.poids_max = poids_max;
-	}
 	
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Page dédition d'une cargaison</title>
+	
+	<!-- lien css -->
+	<h:outputStylesheet library="styles" name="perso.css"/>
+	
+</h:head> 
+<body class="bform"> 
+	
+	<h:form rendered="#{not empty user_login}" style="float: top;">
+		<h:panelGrid style="padding-left: 90%;">
+		
+			<f:facet name="footer">
+				<h:commandButton value="Retour" action="accueil.xhtml" class="bt_accueil" />&nbsp;
+				<h:commandButton value="Se déconnecter" action="#{authenticationBean.deconnecterUtilisateur()}" class="bt_accueil" />
+			</f:facet>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	
+
+	<h:form>
+
+		<!-- récup de l'id cargaison dans un champ caché -->
+		<h:inputHidden value="#{gestionCargaison.cargaison.reference}" />
+		
+		
+		
+		<h:panelGrid columns="2" border="1" cellpadding="5" cellspacing="5"  class="formC2">
+			<f:facet name="header">
+				Formulaire de modification d'une cargaison
+			</f:facet>
+		
+		
+			<h:outputLabel for="idDistance" value="Distance : " />
+			<h:inputText id="idDistance" value="#{gestionCargaison.cargaison.distance}" class="inputText" />
+		
+			<h:outputLabel for="idDateLivraison" value="Date de Livraison : " />
+			<h:inputText id="idDateLivraison" value="#{gestionCargaison.cargaison.date_livraison}" class="inputText" />
+			
+			<h:outputLabel for="idTemperature" value="Température : " />
+			<h:inputText id="idTemperature" value="#{gestionCargaison.cargaison.temperature}" class="inputText" />
+			
+			<h:outputLabel for="idPoidsMax" value="Poids Maximal : " />
+			<h:inputText id="idPoidsMax" value="#{gestionCargaison.cargaison.poids_max}" class="inputText" />
+		
+			<h:outputLabel for="idUtilisateur" value="Utilisateur ID : " />
+			<h:inputText id="idUtilisateur" value="#{gestionCargaison.cargaison.fk}" class="inputText" />
+		
+		
+			<f:facet name="footer">
+				<h:commandButton action="listCargaison" actionListener="#{gestionCargaison.modifierCargaison}" value="Modifier" class="bt2_accueil" />
+			</f:facet>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	
+	
+</body> 
+</html>

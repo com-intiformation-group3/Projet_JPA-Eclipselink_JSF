@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<title>Page d'édition d'une marchandise</title>
+	
+	<!-- lien css -->
+	<h:outputStylesheet library="styles" name="perso.css"/>
+	
+</h:head> 
+<body class="bform"> 
+	
+	<h:form rendered="#{not empty user_login}" style="float: top;">
+		<h:panelGrid style="padding-left: 90%;">
+		
+			<f:facet name="footer">
+				<h:commandButton value="Retour" action="accueil.xhtml" class="bt_accueil" />&nbsp;
+				<h:commandButton value="Se déconnecter" action="#{authenticationBean.deconnecterUtilisateur()}" class="bt_accueil" />
+			</f:facet>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	
+
+	<h:form>
+
+		<!-- récup de l'id marchandise dans un champ caché -->
+		<h:inputHidden value="#{gestionMarchandise.marchandise.idMarchandise}" />
+		
+		
+		
+		<h:panelGrid columns="2" border="1" cellpadding="5" cellspacing="5"  class="formC2">
+			<f:facet name="header">
+				Formulaire de modification d'une marchandise
+			</f:facet>
+			
+			<h:outputLabel for="idNom" value="Nom : " />
+			<h:inputText id="idNom" value="#{gestionMarchandise.marchandise.nom}" class="inputText" />
+		
+			<h:outputLabel for="idPoids" value="Poids : " />
+			<h:inputText id="idPoids" value="#{gestionMarchandise.marchandise.poids}" class="inputText" />
+		
+			<h:outputLabel for="idVolume" value="Volume : " />
+			<h:inputText id="idVolume" value="#{gestionMarchandise.marchandise.volume}" class="inputText" />
+			
+			<h:outputLabel for="idCargaisonRef" value="Cargaison Référence : " />
+			<h:inputText id="idCargaisonRef" value="#{gestionMarchandise.marchandise.fk}" class="inputText" />
+			
+			
+			<f:facet name="footer">
+				<h:commandButton action="listMarchandise" actionListener="#{gestionMarchandise.modifierMarchandise}" value="Modifier" class="bt2_accueil" />
+			</f:facet>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	
+	
+</body> 
+</html>

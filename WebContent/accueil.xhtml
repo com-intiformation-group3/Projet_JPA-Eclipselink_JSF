@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Page d'accueil du site</title>
+	
+	<!-- lien css -->
+<!-- 	<h:outputStylesheet library="styles" name="bootstrap.min.css"/> -->
+	<h:outputStylesheet library="styles" name="jquery-ui.css"/>
+	<h:outputStylesheet library="styles" name="perso.css"/>
+	
+	<!--  lien vers les JS --> 
+    <script src="./assets/scripts/jquery-3.4.1.js"></script>
+        
+	<!-- script jquery ui -->
+    <script src="./assets/scripts/jquery-ui.js"></script>
+    <script src="./assets/scripts/script.js"></script>
+    
+    
+</h:head> 
+<body style="background-color: lightgrey; color: black;"> 
+
+	<!-- 
+		> vérif de la présence de l'attribut 'user_login' dans la session
+		  sauvegardé lors de la connexion du conseiller.
+		
+		> vérif via l'attribut 'rendered' qui permet de conditionner l'affichage d'un élement JSF
+	 -->
+	
+	<h:form rendered="#{not empty user_login}" style="float: right;">
+		<h:panelGrid>
+		
+			<f:facet name="footer">
+				<h:commandButton value="Se déconnecter" action="#{authenticationBean.deconnecterUtilisateur()}" class="bt_accueil"/>
+			</f:facet>
+		
+		</h:panelGrid>
+	</h:form>
+	
+	
+	<!-- ================================================================= -->
+	<!-- ================= Affichage des messages ======================== -->
+	<!-- ================================================================= -->	
+	<br/>
+	<h:messages globalOnly="true" showDetail="true" infoStyle="color: green;" fatalStyle="color:red;" />
+	
+	
+	
+	
+	<!-- ================================================================= -->
+	<!-- ========== Affichage de la liste des cargaisons de la BDD ========== -->
+	<!-- ================================================================= -->
+	<!-- 
+		> affichage de la liste avec le composant JSF '<h:datatable>' :
+				-> attribut 'value' : liste à afficher
+				-> attribut 'var' : itération courante
+				
+		>> -> findAllCargaisonsBdd() retourne une liste<Cargaison>
+		   
+	 -->
+	 <br/>
+	
+	
+<div id="accordion">	 
+  
+	 <h2 style="padding: 2% 3% 0%;">Liste des cargaisons</h2>
+  <div>
+	<h:form class="accueil">
+	<h:dataTable value="#{gestionCargaison.findAllCargaisonsBdd()}" var="cargaison" border="1" width="100%" class="table table-dark table-striped" >
+		
+		<!-- colonne pour afficher le nom de la cargaison : nom de la colonne + données -->
+		<h:column >
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="Référence Cargaison" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{cargaison.reference}" />
+		</h:column>
+		
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Distance" />
+			</f:facet>
+			<h:outputText value="#{cargaison.distance}" />
+		</h:column>
+
+
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Date de Livraison" />
+			</f:facet>
+			<h:outputText value="#{cargaison.date_livraison}" />
+		</h:column>	
+		
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Température" />
+			</f:facet>
+			<h:outputText value="#{cargaison.temperature}" />
+		</h:column>	
+				
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Poids Maximal" />
+			</f:facet>
+			<h:outputText value="#{cargaison.poids_max}" />
+		</h:column>	
+		
+		
+	
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Utilisateur ID" />
+			</f:facet>
+			<h:outputText value="#{cargaison.getUtilisateur().getIdUtilisateur()}" />
+		</h:column>	
+		
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Volume Total" />
+			</f:facet>
+			<h:outputText value="#{cargaison.volume_total}" />
+		</h:column>	
+		
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Poids Total" />
+			</f:facet>
+			<h:outputText value="#{cargaison.poids_total}" />
+		</h:column>	
+		
+		
+		<h:column>
+			<f:facet name="header" class="header">
+				<h:outputText value="Coût Total (€)" />
+			</f:facet>
+			<h:outputText value="#{cargaison.cout_total}" />
+		</h:column>	
+		
+		
+		
+		<!-- modifier la cargaison -->
+		<h:column>	
+		
+			<f:facet name="header" class="header">
+				<h:outputText value="Modifier" />
+			</f:facet>
+			<!-- 
+					attributs du lien h:commandLink :
+						- action : clé d'outcom pour la navigation (ref faces-config.xml)
+						- actionListener : méthode à invoquer dans le managedbean
+			 -->
+			 <h:commandLink id="update" action="editCargaison" actionListener="#{gestionCargaison.selectionnerCargaison}">
+			 
+				 <!-- passage du paramètre au composant : id = 'updateID' / valeur = id de la cargaison -->
+				 <f:param id="updateID" name="id" value="#{cargaison.reference}" />
+				 
+				 <!-- label du lien -->
+				 <h:outputText value="modifier"/>	
+			 </h:commandLink>		
+		</h:column>
+		
+		
+		
+		<h:column>	
+			<!-- supprimer le client -->
+			<f:facet name="header" class="header">
+				<h:outputText value="Supprimer" />
+			</f:facet>			
+			
+			 <h:commandLink id="delete" action="listCargaison" actionListener="#{gestionCargaison.supprimerCargaison}">
+			 
+				 <f:param id="deleteID" name="id" value="#{cargaison.reference}" />
+				 
+				 <h:outputText value="supprimer"/>	
+				 
+			 </h:commandLink>		
+		</h:column>		
+		
+		
+		
+	</h:dataTable>
+	
+	
+	
+	<!-- ================================================================= -->
+	<!-- =========== Bouton pour ajouter une cargaison dans la BDD =========== -->
+	<!-- ================================================================= -->	
+	<br/>
+	<!-- 
+		> attributs de h:commandButton :
+				- action : clé d'outcom (ref faces-config.xml)
+				- actionListener : méthode à invoquer dans le MB
+				- value : label du bouton
+				
+		> au click sur le bouton :
+				-> appel de la méthode 'initialiserCargaison()' du MB qui permet 
+				   d'initialiser un objet cargaison vide pour pouvoir récupérer les 
+				   valeurs du formulaire d'ajout.
+				   
+				-> naviguer vers formulaire d'ajout de la page 'ajouter-cargaison.xhtml'
+	 -->
+	<h:commandButton action="addCargaison" 
+					 actionListener="#{gestionCargaison.initialiserCargaison}" 
+					 value="Ajouter une nouvelle cargaison" />
+	
+	<br/><br/>
+
+	<h:outputLabel for="utilisateurID" value="Utilisateur ID : " />
+	<h:inputText id="utilisateurID" value="#{gestionCargaison.filtreUtilisateurId}" styleClass="form-control"  />
+
+	&nbsp;<h:commandButton action="listCargaison" value="Chercher" class="bt_accueilChercher" />
+	&nbsp;<h:commandButton action="listCargaison" actionListener="#{gestionCargaison.resetFiltre()}" value="Reset" class="bt_accueilReset" />
+	
+
+	
+
+	</h:form>
+  </div>
+	<br/><br/>
+	
+	
+	<h2 style="padding: 2% 3% 0%;">Liste des marchandises</h2>
+  <div>
+	<h:form class="accueil">
+	<h:dataTable value="#{gestionMarchandise.findAllMarchandisesBdd()}" var="marchandise" border="1" width="100%" class="table table-dark table-striped" >
+		
+		<!-- colonne pour afficher le nom de la marchandise : nom de la colonne + données -->
+		<h:column>
+			<!-- en-tête de la colonne -->
+			<f:facet name="header">
+				<h:outputText value="ID Marchandise" />
+			</f:facet>
+			<!-- donnée de la colonne -->
+			<h:outputText value="#{marchandise.idMarchandise}" />
+		</h:column>
+		
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Nom" />
+			</f:facet>
+			<h:outputText value="#{marchandise.nom}" />
+		</h:column>
+
+
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Poids" />
+			</f:facet>
+			<h:outputText value="#{marchandise.poids}" />
+		</h:column>	
+		
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Volume" />
+			</f:facet>
+			<h:outputText value="#{marchandise.volume}" />
+		</h:column>	
+				
+		
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Cargaison Référence" />
+			</f:facet>
+			<h:outputText value="#{marchandise.cargaison.reference}" />
+		</h:column>	
+		
+		
+		
+		
+		<!-- modifier la marchandise -->
+		<h:column>	
+		
+			<f:facet name="header">
+				<h:outputText value="Modifier" />
+			</f:facet>
+			<!-- 
+					attributs du lien h:commandLink :
+						- action : clé d'outcom pour la navigation (ref faces-config.xml)
+						- actionListener : méthode à invoquer dans le managedbean
+			 -->
+			 <h:commandLink id="update" action="editMarchandise" actionListener="#{gestionMarchandise.selectionnerMarchandise}">
+			 
+				 <!-- passage du paramètre au composant : id = 'updateID' / valeur = id du compte -->
+				 <f:param id="updateID" name="id" value="#{marchandise.idMarchandise}" />
+				 
+				 <!-- label du lien -->
+				 <h:outputText value="modifier"/>	
+			 </h:commandLink>		
+		</h:column>
+		
+		
+		
+		<h:column>	
+			<!-- supprimer la marchandise -->
+			<f:facet name="header">
+				<h:outputText value="Supprimer" />
+			</f:facet>			
+			
+			 <h:commandLink id="delete" action="listMarchandise" actionListener="#{gestionMarchandise.supprimerMarchandise}">
+			 
+				 <f:param id="deleteID" name="id" value="#{marchandise.idMarchandise}" />
+				 
+				 <h:outputText value="supprimer"/>	
+				 
+			 </h:commandLink>		
+		</h:column>		
+		
+	</h:dataTable>
+	
+	
+	
+	<!-- ================================================================= -->
+	<!-- =========== Bouton pour ajouter une marchandise dans la BDD =========== -->
+	<!-- ================================================================= -->	
+	<br/>
+	<!-- 
+		> attributs de h:commandButton :
+				- action : clé d'outcom (ref faces-config.xml)
+				- actionListener : méthode à invoquer dans le MB
+				- value : label du bouton
+				
+		> au click sur le bouton :
+				-> appel de la méthode 'initialiserMarchandise()' du MB qui permet 
+				   d'initialiser un objet marchandise vide pour pouvoir récupérer les 
+				   valeurs du formulaire d'ajout.
+				   
+				-> naviguer vers formulaire d'ajout de la page 'ajouter-marchandise.xhtml'
+	 -->
+	<h:commandButton action="addMarchandise" 
+					 actionListener="#{gestionMarchandise.initialiserMarchandise}" 
+					 value="Ajouter une nouvelle marchandise" />&nbsp;
+	
+	
+	
+	<br/><br/>
+
+	<h:outputLabel for="cargaisonRef" value="Cargaison Référence : " />
+	<h:inputText id="cargaisonRef" value="#{gestionMarchandise.filtreCargaisonId}" styleClass="form-control"  />
+
+	&nbsp;<h:commandButton action="listMarchandise" value="Chercher" class="bt_accueilChercher" />
+	&nbsp;<h:commandButton action="listMarchandise" actionListener="#{gestionMarchandise.resetFiltre()}" value="Reset" class="bt_accueilReset" />
+	
+		
+
+
+	  	
+	
+	</h:form>
+  </div>
+ </div>
+</body> 
+</html>

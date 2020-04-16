@@ -4,17 +4,19 @@ import java.util.List;
 
 public interface IGenericDAO<T> {
 
-	public void ajouter(T entity);
+	public boolean ajouter(T entity);
 
-	public void modifier(T entity);
+	public boolean modifier(T entity);
 
-	public void supprimer(Long id);
+	public boolean supprimer(Long id);
 
 	public T getById(Long id);
 
 	public List<T> getAll();
 	
-	public List<T> getAllByFK(String nomFK, int valeur);
+	public List<T> getAllByFKc(Long valeur);
+	
+	public List<T> getAllByFKm(Long valeur);
 	
 	public Long count();
 	
